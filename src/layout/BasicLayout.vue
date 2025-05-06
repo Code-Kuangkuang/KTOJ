@@ -4,7 +4,7 @@
       <a-layout-header class="header">
         <GlobalHeader></GlobalHeader>
       </a-layout-header>
-      <a-layout-content class="content">123<router-view /></a-layout-content>
+      <a-layout-content class="content"><router-view /></a-layout-content>
       <a-layout-footer class="footer">online Judge</a-layout-footer>
     </a-layout>
   </div>
