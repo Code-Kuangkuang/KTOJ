@@ -1,7 +1,7 @@
 <template>
-  <div class="ExampleView">
+  <div id="ExampleView">
     <MdEditor :value="mdValue" :handle-change="onMdChange"></MdEditor>
-    <CodeEditor :value="codeValue" :handle-change="onCodeChange"></CodeEditor>
+    <!-- <CodeEditor :value="codeValue" :handle-change="onCodeChange"></CodeEditor> -->
   </div>
 </template>
 
@@ -24,4 +24,7 @@ const onCodeChange = (val: string) => {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+#ExampleView {
+}
+</style>
