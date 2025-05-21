@@ -1,12 +1,5 @@
 <template>
-  <Editor
-    :locale="locale"
-    :value="value"
-    :mode="mode"
-    :uploadImages="handleUpload"
-    :plugins="plugins"
-    @change="handleChange"
-  />
+  <Viewer :value="value" :plugins="plugins" />
 </template>
 
 <script setup lang="ts">
@@ -23,7 +16,7 @@ import mediumZoom from "@bytemd/plugin-medium-zoom";
 import mermaid_zhHans from "@bytemd/plugin-mermaid/locales/zh_Hans.json";
 import math_zhHans from "@bytemd/plugin-math/locales/zh_Hans.json";
 import gfm_zhHans from "@bytemd/plugin-gfm/locales/zh_Hans.json";
-import { Editor, Viewer } from "@bytemd/vue-next";
+import { Viewer } from "@bytemd/vue-next";
 import { defineProps, withDefaults } from "vue";
 
 /**
@@ -31,10 +24,6 @@ import { defineProps, withDefaults } from "vue";
  */
 interface Props {
   value: string;
-  mode?: string;
-  locale?: any;
-  handleUpload?: (files: File[]) => Promise<any>;
-  handleChange: (v: string) => void;
 }
 
 const plugins = [
@@ -57,47 +46,10 @@ const plugins = [
 
 const props = withDefaults(defineProps<Props>(), {
   value: () => "",
-  mode: () => "auto",
-  locale: () => zh_Hans,
-  handleChange: (v: string) => {
-    console.log(v);
-  },
-  handleUpload: async (files: File[]) => {
-    // 模拟上传
-    const uploaded = await Promise.all(
-      files.map(async (file) => {
-        const formData = new FormData();
-        formData.append("file", file);
-
-        const res = await fetch("https://your-upload-api.com/upload", {
-          method: "POST",
-          body: formData,
-        });
-
-        const data = await res.json();
-
-        // 返回必须是 { url: 'https://...' }
-        return {
-          url: data.url, // 你的接口返回的图片地址
-        };
-      })
-    );
-
-    return uploaded;
-  },
 });
 </script>
 
 <style>
-/**
-隐藏github图标
- */
-.bytemd-toolbar-icon.bytemd-tippy.bytemd-tippy-right:last-child {
-  display: none;
-}
-.bytemd {
-  height: 500px;
-}
 :deep(.bytemd-fullscreen.bytemd) {
   z-index: 100;
 }

@@ -5,7 +5,6 @@
  */
 
 import ACCESS_ENUM from "./accessEnum";
-
 const checkAccess = (loginUser: any, needAccess = ACCESS_ENUM.NOT_LOGIN) => {
   const loginUserAccess = loginUser?.userRole ?? ACCESS_ENUM.NOT_LOGIN;
   if (needAccess === ACCESS_ENUM.NOT_LOGIN) {
@@ -13,9 +12,10 @@ const checkAccess = (loginUser: any, needAccess = ACCESS_ENUM.NOT_LOGIN) => {
   }
 
   if (needAccess === ACCESS_ENUM.USER) {
-    if (loginUserAccess !== ACCESS_ENUM.NOT_LOGIN) {
+    if (loginUserAccess === ACCESS_ENUM.NOT_LOGIN) {
       return false;
     }
+    console.log(123);
   }
 
   if (needAccess === ACCESS_ENUM.ADMIN) {

@@ -41,7 +41,7 @@ const router = useRouter();
 const store = useStore();
 
 const visibleRoutes = computed(() => {
-  return routes.filter((item, index) => {
+  return routes.filter((item) => {
     if (item.meta?.hideInMenu) {
       return false;
     }
@@ -57,7 +57,7 @@ const visibleRoutes = computed(() => {
 const selectedKeys = ref(["/"]);
 
 //确保路由变化后对应的菜单项会高亮显示
-router.afterEach((to, from, next) => {
+router.afterEach((to) => {
   selectedKeys.value = [to.path];
 });
 
